@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from '../images/logo.svg';
 import axios from 'axios'
-import apiConfig from './config/api-config'
-import './App.css';
+import apiConfig from '../config/api-config'
+import '../stylesheets/App.css';
 
 class App extends Component {
   constructor(props) {
