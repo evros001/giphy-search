@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import logo from '../images/logo.svg';
+import { ReactComponent as Giphylogo } from '../images/giphy-logo.svg';
 import axios from 'axios'
-import apiConfig from '../config/api-config'
-import '../stylesheets/App.css';
+import appConfig from '../config/app-config'
+import styles from '../stylesheets/app.module.scss'
+import SearchContainer from './SearchContainer'
+import ResultsContainer from './ResultsContainer'
+// import DetailContainer from './DetailContainer'
 
 class App extends Component {
   constructor(props) {
@@ -10,18 +13,24 @@ class App extends Component {
 
     this.state = { 
       results: [],
-      query: ''
+      query: '',
+      isDetail: false
     }
 
     this.getResponse = this.getResponse.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.getResponse = this.getResponse.bind(this)
   }
 
   // handle response
-  getResponse = async () => {
-    const { baseUrl } = apiConfig
+  getResponse = async (e) => {
+    if(e) {
+      e.preventDefault()
+    }
+
+    const { apiBaseSearchUrl } = appConfig
     const query = this.state.query
-    const url = `${baseUrl}${query}`
+    const url = `${apiBaseSearchUrl}${query}`
 
     await axios.get(url)
       .then(res => {
@@ -41,37 +50,27 @@ class App extends Component {
   }
 
   // handle input
-  handleInputChange() {
+  handleInputChange(e) {
     this.setState({
-      query: this.search.value
-    }, () => {
-      this.getResponse()
+      query: e.target.value
     })
   }
 
   render() {
-    const results = this.state.results
+    const { results, query, isDetail, loading } = this.state
+    console.log(results)
 
     return (
-      <div className="App">
-        <form>
-          <input
-            placeholder="Search for..."
-            ref={input => this.search = input}
-            onChange={this.handleInputChange}
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <Giphylogo className={styles.logo}/>
+          <SearchContainer 
+            handleInputChange={this.handleInputChange}
+            getResponse={this.getResponse} 
           />
-          <p>{this.state.query}</p>
-       </form>
-        <div className="gifs-container">
-          {this.state.results.map((result, index) => (
-            <img 
-              key={index}
-              className="gif-img"
-              src={result.images.preview_gif.url} 
-              alt={result.title}  
-              width={result.images.preview_gif.width}/>
-          ))}
+          {/*<DetailContainer />*/}
         </div>
+        <ResultsContainer results={results} />
       </div>
     )
   }

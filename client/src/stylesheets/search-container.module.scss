@@ -1,0 +1,30 @@
+.container { 
+  width: 100%
+}
+
+.input {
+  width: calc(100% - 17px);
+  border-left-style: none;
+  border-top-style: none;
+  border-right-style: none;
+  font-size: 27px;
+
+  &:focus {
+    outline: none;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  &::placeholder {
+    color: black;
+  }
+}
+
+.button {
+  width: 17px;
+  position: relative;
+  padding: 0;
+  border: none;
+}
