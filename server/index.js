@@ -12,9 +12,11 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.get('/giphy/key', (req, res) => {
-//   res.send({ apiKey: 'OxgPHq5Lo88vYBbr52PeueBl0QzB58ib' });
-// });
+// to avoid CORS errors on local host 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.use('/api', searchRouter)
 

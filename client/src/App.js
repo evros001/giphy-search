@@ -1,58 +1,51 @@
 import React from 'react';
 import logo from './logo.svg';
+import axios from 'axios'
+import apiConfig from './config/api-config'
 import './App.css';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props)
 
     this.state = { 
-      apiKey: undefined 
+      results: [],
+      searchTerm: 'homer'
     }
 
     this.getResponse = this.getResponse.bind(this)
   }
 
   getResponse = async () => {
-    const response = await fetch('/giphy/key')
-    const body = await response.json()
+    const { baseUrl } = apiConfig
+    const searchTerm = this.state.searchTerm
+    const url = `${baseUrl}${searchTerm}`
 
-    if (response.status !== 200) {
-      throw new Error(body.message)
-    }
-
-    return body
+    await axios.get(url)
+      .then(res => {
+        this.setState({
+          results: res.data.data
+        })
+      })
+      .catch(err => { 
+        console.log(err) 
+      })
   }
 
   componentDidMount() {
     this.getResponse()
-      .then(res => {
-        // console.log(res.apiKey)
-        this.setState({
-          apiKey: res.apiKey
-        })
-      })
   }
 
   render() {
-
+    const results = this.state.results
+    console.log(results)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {this.state.apiKey}
-          </a>
-        </header>
+        <ul>
+          {this.state.results.map((result, index) => (
+            <li key={index}>{result.url}</li>
+          ))}
+        </ul>
       </div>
     )
   }
