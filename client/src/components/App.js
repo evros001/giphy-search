@@ -7,13 +7,15 @@ import SearchContainer from './SearchContainer'
 import ResultsContainer from './ResultsContainer'
 // import DetailContainer from './DetailContainer'
 
+const { apiBaseSearchUrl, apiBaseTrendingUrl } = appConfig
+
 class App extends Component {
   constructor(props) {
     super(props)
 
     this.state = { 
       results: [],
-      query: '',
+      query: undefined,
       isDetail: false
     }
 
@@ -24,13 +26,18 @@ class App extends Component {
 
   // handle response
   getResponse = async (e) => {
+    const { query } = this.state
+
     if(e) {
       e.preventDefault()
     }
 
-    const { apiBaseSearchUrl } = appConfig
-    const query = this.state.query
-    const url = `${apiBaseSearchUrl}${query}`
+    const url = this.state.query 
+      ? `${apiBaseSearchUrl}${query}`
+      : apiBaseTrendingUrl
+
+    // const query = this.state.query
+    // const url = `${apiBaseSearchUrl}${query}`
 
     await axios.get(url)
       .then(res => {
@@ -62,13 +69,14 @@ class App extends Component {
 
     return (
       <div className={styles.container}>
+        <div className={styles.gradient}></div>
         <div className={styles.wrapper}>
           <Giphylogo className={styles.logo}/>
           <SearchContainer 
             handleInputChange={this.handleInputChange}
             getResponse={this.getResponse} 
           />
-          {/*<DetailContainer />*/}
+          {/*<TabContainer />*/}
         </div>
         <ResultsContainer results={results} />
       </div>

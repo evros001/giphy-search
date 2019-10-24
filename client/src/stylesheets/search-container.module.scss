@@ -1,5 +1,12 @@
+@import './brand';
+
 .container { 
   width: 100%
+}
+
+.form {
+  max-width: 900px;
+  display: flex;
 }
 
 .input {
@@ -13,18 +20,22 @@
     outline: none;
 
     &::placeholder {
-      color: #999;
+      color: $gray;
     }
   }
 
   &::placeholder {
-    color: black;
+    color: $black;
   }
 }
 
 .button {
-  width: 17px;
   position: relative;
   padding: 0;
   border: none;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }

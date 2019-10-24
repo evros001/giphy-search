@@ -1,5 +1,19 @@
+@import './brand';
+
 .container {
   max-width: 100%
+}
+
+.gradient {
+  height: 6px;
+  width: 100%;
+  background-image: linear-gradient(to right, 
+    $purple, 
+    $light-blue, 
+    $light-green, 
+    $light-yellow, 
+    $red
+  );
 }
 
 .wrapper {
