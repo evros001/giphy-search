@@ -1,10 +1,10 @@
 const axios = require('axios');
 
-const baseSearchURL = 'https://api.giphy.com/v1/gifs/search'
+const baseSearchURL = 'https://api.giphy.com/v1/gifs/trending'
 const apiKey = process.env.GIPHYAPIKEY
 
-const getSearch = async (query) => {
-	const url = `${baseSearchURL}?api_key=${apiKey}&q=${query}`
+const getTrending = async () => {
+	const url = `${baseSearchURL}?api_key=${apiKey}`
 	
   try {
     const results = await axios.get(url)
@@ -15,4 +15,4 @@ const getSearch = async (query) => {
   }
 }
 
-module.exports = { getSearch }
+module.exports = { getTrending }

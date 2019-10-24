@@ -5,7 +5,7 @@ function ResultsContainer (props) {
   const { results } = props
 
   const gifList = results.map((result, index) => (
-    <GifCard result={result} index={index} />
+    <GifCard key={index} result={result} index={index} />
   ))
 
   return (

@@ -18,8 +18,6 @@ function SearchContainer (props) {
           <SeachIcon />
         </button>
       </form>
-      {/*soon to be dynamic with tabs/random implementation*/}
-      <div className=''>Trending</div>
     </div>
   )
 }

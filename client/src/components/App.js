@@ -5,7 +5,7 @@ import appConfig from '../config/app-config'
 import styles from '../stylesheets/app.module.scss'
 import SearchContainer from './SearchContainer'
 import ResultsContainer from './ResultsContainer'
-// import DetailContainer from './DetailContainer'
+import TabContainer from './TabContainer'
 
 const { apiBaseSearchUrl, apiBaseTrendingUrl } = appConfig
 
@@ -16,7 +16,11 @@ class App extends Component {
     this.state = { 
       results: [],
       query: undefined,
-      isDetail: false
+      isDetail: false,
+      tabTitle: null,
+      totalGifCount: null,
+      error: null,
+      validSearch: false
     }
 
     this.getResponse = this.getResponse.bind(this)
@@ -27,6 +31,7 @@ class App extends Component {
   // handle response
   getResponse = async (e) => {
     const { query } = this.state
+    const { gifTab, trending, error } = appConfig
 
     if(e) {
       e.preventDefault()
@@ -36,17 +41,25 @@ class App extends Component {
       ? `${apiBaseSearchUrl}${query}`
       : apiBaseTrendingUrl
 
-    // const query = this.state.query
-    // const url = `${apiBaseSearchUrl}${query}`
+    const tabTitle = this.state.query
+      ? gifTab
+      : trending
 
     await axios.get(url)
       .then(res => {
         this.setState({
-          results: res.data.data
+          results: res.data.data,
+          totalGifCount: res.data.pagination.total_count,
+          tabTitle: tabTitle,
+          validSearch: true
         })
         console.log(this.state.results)
       })
-      .catch(err => { 
+      .catch(err => {
+        const errorMessage = `${error}${err.message}`
+        this.setState({
+          tabTitle: errorMessage
+        }) 
         console.log(err) 
       })
   }
@@ -64,7 +77,16 @@ class App extends Component {
   }
 
   render() {
-    const { results, query, isDetail, loading } = this.state
+    const { 
+      results, 
+      query, 
+      isDetail, 
+      loading, 
+      tabTitle,
+      totalGifCount,
+      validSearch
+    } = this.state
+
     console.log(results)
 
     return (
@@ -76,7 +98,11 @@ class App extends Component {
             handleInputChange={this.handleInputChange}
             getResponse={this.getResponse} 
           />
-          {/*<TabContainer />*/}
+          <TabContainer 
+            tabTitle={tabTitle} 
+            totalGifCount={totalGifCount}
+            validSearch={validSearch}
+          />
         </div>
         <ResultsContainer results={results} />
       </div>

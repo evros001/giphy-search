@@ -1,0 +1,28 @@
+@import './brand';
+
+.container {
+  display: flex;
+  align-items: flex-end;
+  margin: 40px 0 11px;
+  font-size: 17px;
+}
+
+.title {
+  font-size: 22px;
+  color: $gray;
+}
+
+.results {
+  font-size: 22px;
+  color: $black;
+}
+
+.count {
+  margin-left: 8px;
+  background-color: $black;
+  border-radius: 8px;
+  color: $white;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 6px;
+}

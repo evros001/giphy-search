@@ -19,13 +19,15 @@ class GifCard extends Component {
       this.setState({
         isLoading: false
       })
-    },500) 
+    }, 500) 
   }
 
   render () {
     const { result, index } = this.props
     const { isLoading } = this.state
-    const displayType = isLoading ? styles.hide : styles.show
+    const displayType = isLoading 
+      ? styles.hide 
+      : styles.show
 
     return (
       <div className={styles.container}>
