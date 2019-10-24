@@ -1,5 +1,6 @@
 @import './brand';
 
+
 .container {
   max-width: 100%
 }
@@ -17,8 +18,9 @@
 }
 
 .wrapper {
-  max-width: 100%;
+  max-width: $xl;
   padding: 60px 60px 16px;
+  margin: auto;
 
   .logo {
     margin: auto;

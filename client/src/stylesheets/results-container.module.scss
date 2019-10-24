@@ -1,0 +1,22 @@
+@import './brand';
+@import './mixins/media-query';
+
+.container {
+  padding: 0 10px;
+  column-count: 4;
+  column-gap: 1em;
+  max-width: $xl;
+  margin: auto;
+
+  @include media-breakpoint($lg) {
+    column-count: 3;
+  }
+
+  @include media-breakpoint($md) {
+    column-count: 2;
+  }
+
+  @include media-breakpoint($sm) {
+    column-count: 1;
+  }
+}

@@ -1,7 +1,18 @@
-.gif-card-container {
- .giphy-gif {
+.container {
+  background-color: #eee;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+}
 
- }
+.loader {
+  max-width: calc(100% / 4);
+  margin: auto;
+  padding: 20px 0;
+}
+
+.gif {
+  width: 100%;
 }
 
 .show {

@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '../stylesheets/results-container.module.scss'
 import GifCard from './GifCard'
 
 function ResultsContainer (props) {
@@ -9,7 +10,7 @@ function ResultsContainer (props) {
   ))
 
   return (
-    <div className="gifs-container">
+    <div className={styles.container}>
       { gifList }
     </div>
   )
