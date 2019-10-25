@@ -1,5 +1,6 @@
 //colors
 $gray: #C7C7C7;
+$light-gray: #ECECEC;
 $purple: #A423FF;
 $red: #FF6562;
 $light-blue: #00CEFF;
@@ -15,3 +16,8 @@ $lg: 1200px;
 $md: 720px;
 $sm: 480px;
 $xs: 320px;
+
+$imgKey: random(5);
+
+$list: $purple, $red, $light-blue, $light-green, $light-yellow;
+$nth: nth($list, $imgKey);

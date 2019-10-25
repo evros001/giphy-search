@@ -7,7 +7,8 @@ class GifCard extends Component {
     super(props)
 
     this.state = { 
-      isLoading: true
+      isLoading: true,
+      active: true
     }
 
     this.handleGifLoaded = this.handleGifLoaded.bind(this)
@@ -21,19 +22,24 @@ class GifCard extends Component {
   }
 
   render () {
-    const { result, index } = this.props
+    const { 
+      result, 
+      index, 
+      displayDetail
+    } = this.props
+
     const { isLoading } = this.state
     const displayType = isLoading 
       ? styles.hide 
       : styles.show
 
     return (
-      <div className={styles.container}>
+      <div className={styles.container} onClick={displayDetail}>
         <Loader
           key={index + 1}
           visible={isLoading}
           type="Oval"
-          color="#00BFFF"
+          color="#ffffff"
           className={styles.loader}
         />
         <img

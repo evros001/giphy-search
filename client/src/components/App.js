@@ -83,7 +83,7 @@ class App extends Component {
   }
 
   // get initial results
-  componentDidMount() {
+  componentDidMount () {
     this.getResponse()
   }
 
@@ -127,7 +127,7 @@ class App extends Component {
           />
         </div>
         <ResultsContainer 
-          results={results} 
+          results={results}
         />
         <BottomScrollListener onBottom={this.handleScroll} />
       </div>
