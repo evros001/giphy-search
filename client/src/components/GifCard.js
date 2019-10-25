@@ -15,11 +15,9 @@ class GifCard extends Component {
 
   // timeout for UX benefit, response comes very quickly 
   handleGifLoaded () {
-    setTimeout(() => {
-      this.setState({
-        isLoading: false
-      })
-    }, 500) 
+    this.setState({
+      isLoading: false
+    })
   }
 
   render () {

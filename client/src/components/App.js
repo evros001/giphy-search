@@ -16,17 +16,17 @@ class App extends Component {
 
     this.state = { 
       results: [],
-      query: undefined,
       offset: 0,
       isDetail: false,
       tabTitle: null,
       totalGifCount: null,
-      error: null,
-      validSearch: false
+      error: false,
+      validSearch: false,
+      limit: 25
     }
 
     this.getResponse = this.getResponse.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
+    // this.handleInputChange = this.handleInputChange.bind(this)
     this.getResponse = this.getResponse.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
     this.baseState = this.state 
@@ -34,8 +34,10 @@ class App extends Component {
 
   // handle response
   getResponse = async (e, isPagination = false) => {
-    const { query, offset } = this.state
+    const query = document.getElementsByName('query')[0].value
+    const { offset, limit } = this.state
     const { gifTab, trending, error } = appConfig
+    console.log("QUERY", query)
 
     if(e) {
       e.preventDefault()
@@ -46,37 +48,38 @@ class App extends Component {
     }
 
     const url = query 
-      ? `${apiBaseSearchUrl}${query}/${offset}`
-      : apiBaseTrendingUrl
+      ? `${apiBaseSearchUrl}${query}/${offset}/${limit}`
+      : `${apiBaseTrendingUrl}${query}/${offset}/${limit}`
 
-    const tabTitle = this.state.query
+    const tabTitle = query
       ? gifTab
       : trending
 
     await axios.get(url)
       .then(res => {
-        console.log(res.data.pagination)
-        const { offset, count } = res.data.pagination
+        const { count } = res.data.pagination
         this.setState(prevState => ({
           results: [...prevState.results, ...res.data.data],
-          offset: offset + count,
+          offset: prevState.offset += count,
           totalGifCount: res.data.pagination.total_count,
           tabTitle: tabTitle,
           validSearch: true,
         }))
-        console.log(this.state.results)
+        console.log(this.state)
       })
       .catch(err => {
         const errorMessage = `${error}${err.message}`
         this.setState({
+          error: true,
           tabTitle: errorMessage
         }) 
-        console.log(err) 
+        console.log(err.message) 
       })
   }
 
-  handleScroll() {
-    this.getResponse(window.event, true)
+  handleScroll = async (query) => {
+    console.log("handleScroll", query)
+    await this.getResponse(window.event, true)
   }
 
   // get initial results
@@ -84,22 +87,26 @@ class App extends Component {
     this.getResponse()
   }
 
-  // handle input
-  handleInputChange(e) {
-    this.setState({
-      query: e.target.value
-    })
-  }
+  // // handle input
+  // handleInputChange(e) {
+  //   const query = document.getElementsByName('query')[0].value
+
+  //   this.setState({ query })
+    
+  //   // this.setState({
+  //   //   query: e.target.value
+  //   // })
+  // }
 
   render() {
     const { 
       results, 
-      query, 
       isDetail, 
       loading, 
       tabTitle,
       totalGifCount,
-      validSearch
+      validSearch,
+      error
     } = this.state
 
     console.log(results)
@@ -110,10 +117,10 @@ class App extends Component {
         <div className={styles.wrapper}>
           <Giphylogo className={styles.logo}/>
           <SearchContainer 
-            handleInputChange={this.handleInputChange}
             getResponse={this.getResponse} 
           />
-          <TabContainer 
+          <TabContainer
+            error={error} 
             tabTitle={tabTitle} 
             totalGifCount={totalGifCount}
             validSearch={validSearch}

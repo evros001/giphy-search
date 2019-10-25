@@ -2,7 +2,8 @@ const { getSearch } = require('../services/search-service')
 
 getGifs = async (req, res) => {
   try {
-    const response = await getSearch(req.params.query, req.params.offset)
+    const { query, offset, limit } = req.params
+    const response = await getSearch(query, offset, limit)
     res.json(response)
   } 
   catch (err) {

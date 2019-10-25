@@ -2,7 +2,8 @@ const { getTrending } = require('../services/trending-service')
 
 getGifs = async (req, res) => {
   try {
-    const response = await getTrending()
+  	const { offset, limit } = req.params
+    const response = await getTrending(offset, limit)
     res.json(response)
   } 
   catch (err) {

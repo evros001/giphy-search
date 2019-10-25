@@ -4,11 +4,17 @@ import Loader from 'react-loader-spinner'
 import styles from '../stylesheets/tab-container.module.scss'
 
 function TabContainer (props) {
-  const { tabTitle, totalGifCount, validSearch } = props
+  const { 
+    tabTitle, 
+    totalGifCount, 
+    validSearch,
+    error 
+  } = props
+
   const { noResults } = appConfig
   const emptyPayload = totalGifCount > 0
   
-  const title = emptyPayload 
+  const title = emptyPayload || error 
     ? tabTitle
     : noResults
 
