@@ -4,6 +4,8 @@
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+  position: relative;
+  cursor: pointer;
 
   &:nth-child(5n+0) {
     background-color: $purple;

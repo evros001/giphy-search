@@ -26,7 +26,6 @@ class App extends Component {
     }
 
     this.getResponse = this.getResponse.bind(this)
-    // this.handleInputChange = this.handleInputChange.bind(this)
     this.getResponse = this.getResponse.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
     this.baseState = this.state 
@@ -128,6 +127,7 @@ class App extends Component {
         </div>
         <ResultsContainer 
           results={results}
+          copylink={this.copylink}
         />
         <BottomScrollListener onBottom={this.handleScroll} />
       </div>
