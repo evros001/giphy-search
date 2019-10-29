@@ -11,7 +11,7 @@ This will run the node server (on localhost:5000) and client server concurrently
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-#### 'Notes'
+## Notes
 
 The application will automatically fetch the most popular trending gifs and display them.<br />
 
@@ -19,7 +19,7 @@ Enter a search term into the input feild to find related gifs.<br />
 
 In both trending and input search you can scroll down and the application will dynamically fetch more gifs if available.<br /> 
 
-##### 'Copying Gifs'
+## Copying Gifs
 
 Click on any gif tile, an overlay will display and you can click 'COPY' to have the individual gif copied to your clipboard.<br />
 
