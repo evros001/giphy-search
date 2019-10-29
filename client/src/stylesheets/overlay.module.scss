@@ -1,3 +1,5 @@
+@import './brand';
+
 .show {
   position: absolute;
   background: black;
@@ -20,14 +22,30 @@
   display: flex;
   align-items: flex-end;
   padding: calc(10%) calc(3%) calc(10%) calc(33%);
+
+  span {
+    margin-left: 5px;
+    font-weight: bold;
+
+    &:hover {
+      color: $purple
+    }
+  }
+}
+
+.copied {
+  color: $purple
 }
 
 .close {
   display: flex;
   align-items: flex-end;
   padding: calc(10%) calc(33%) calc(10%) 0;
+  font-weight: bold;
 }
 
 .cancel {
-
+  &:hover {
+    color: $red
+  }
 }

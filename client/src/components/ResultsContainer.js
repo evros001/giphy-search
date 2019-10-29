@@ -5,8 +5,6 @@ import GifCard from './GifCard'
 function ResultsContainer (props) {
   const { results } = props
 
-  console.log('props', props)
-
   const gifList = results.map((result, index) => (
     <GifCard 
       key={index} 

@@ -37,7 +37,6 @@ class App extends Component {
     const query = document.getElementsByName('query')[0].value
     const { offset, limit } = this.state
     const { gifTab, trending, error } = appConfig
-    console.log("QUERY", query)
 
     if(e) {
       e.preventDefault()
@@ -70,7 +69,6 @@ class App extends Component {
           validSearch: true,
           loading: false
         }))
-        console.log(this.state)
       })
       .catch(err => {
         const errorMessage = `${error}${err.message}`
@@ -83,7 +81,6 @@ class App extends Component {
   }
 
   handleScroll = async (query) => {
-    console.log("handleScroll", query)
     await this.getResponse(window.event, true)
   }
 
@@ -91,17 +88,6 @@ class App extends Component {
   componentDidMount () {
     this.getResponse()
   }
-
-  // // handle input
-  // handleInputChange(e) {
-  //   const query = document.getElementsByName('query')[0].value
-
-  //   this.setState({ query })
-    
-  //   // this.setState({
-  //   //   query: e.target.value
-  //   // })
-  // }
 
   render() {
     const { 
@@ -113,8 +99,6 @@ class App extends Component {
       validSearch,
       error
     } = this.state
-
-    console.log(results)
 
     return (
       <div className={styles.container} >

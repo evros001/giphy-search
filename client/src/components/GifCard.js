@@ -10,7 +10,8 @@ class GifCard extends Component {
     this.state = { 
       isLoading: true,
       active: true,
-      overlayActive: false
+      overlayActive: false,
+      linkIsCopied: false
     }
 
     this.handleGifLoaded = this.handleGifLoaded.bind(this)
@@ -27,8 +28,19 @@ class GifCard extends Component {
   }
 
   copylink (e) {
-    console.log('hit', e.currentTarget.dataset.link)
-    // console.log("e.target")
+    const link = e.currentTarget.dataset.link
+    
+    // create text area to copy dataset gif link then remove
+    let textArea = document.createElement("textarea");
+    textArea.value = link;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy')
+    document.body.removeChild(textArea)
+
+    this.setState({
+      linkIsCopied: true
+    })
   }
 
   closeOverlay (e) {
@@ -48,7 +60,7 @@ class GifCard extends Component {
 
   render () {
     const { result, index } = this.props
-    const { isLoading, overlayActive } = this.state
+    const { isLoading, overlayActive, linkIsCopied } = this.state
    
     const displayType = isLoading 
       ? styles.hide 
@@ -60,7 +72,8 @@ class GifCard extends Component {
           link={result.images.original.url} 
           overlayActive={overlayActive}
           closeOverlay={this.closeOverlay}
-          copylink={this.copylink} 
+          copylink={this.copylink}
+          linkIsCopied={linkIsCopied} 
         />
         <Loader
           key={index + 1}
