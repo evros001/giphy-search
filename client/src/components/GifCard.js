@@ -47,12 +47,12 @@ class GifCard extends Component {
     e.stopPropagation()
 
     this.setState({
-      overlayActive: false
+      overlayActive: false,
+      linkIsCopied: false
     })
   }
 
   openOverlay () {
-    console.log("OPEN")
     this.setState({
       overlayActive: true
     })

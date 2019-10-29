@@ -17,7 +17,6 @@ class App extends Component {
     this.state = { 
       results: [],
       offset: 0,
-      isDetail: false,
       tabTitle: null,
       totalGifCount: null,
       error: false,
@@ -91,8 +90,7 @@ class App extends Component {
 
   render() {
     const { 
-      results, 
-      isDetail, 
+      results,
       loading, 
       tabTitle,
       totalGifCount,

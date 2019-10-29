@@ -6,8 +6,7 @@ import styles from '../stylesheets/tab-container.module.scss'
 function TabContainer (props) {
   const { 
     tabTitle, 
-    totalGifCount, 
-    validSearch,
+    totalGifCount,
     loading,
     error 
   } = props

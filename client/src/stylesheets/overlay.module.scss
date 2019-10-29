@@ -8,6 +8,8 @@
   color: white;
   opacity: 0.75;
   display: flex;
+  text-align: center;
+  align-items: center;
 }
 
 .hide {
@@ -21,15 +23,14 @@
 .copy {
   display: flex;
   align-items: flex-end;
-  padding: calc(10%) calc(3%) calc(10%) calc(33%);
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5px;
 
   span {
     margin-left: 5px;
     font-weight: bold;
-
-    &:hover {
-      color: $purple
-    }
   }
 }
 
@@ -40,12 +41,5 @@
 .close {
   display: flex;
   align-items: flex-end;
-  padding: calc(10%) calc(33%) calc(10%) 0;
   font-weight: bold;
-}
-
-.cancel {
-  &:hover {
-    color: $red
-  }
 }
