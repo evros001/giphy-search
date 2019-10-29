@@ -22,7 +22,8 @@ class App extends Component {
       totalGifCount: null,
       error: false,
       validSearch: false,
-      limit: 25
+      limit: 25,
+      loading: false
     }
 
     this.getResponse = this.getResponse.bind(this)
@@ -46,6 +47,10 @@ class App extends Component {
       this.setState(this.baseState)
     }
 
+    this.setState({
+      loading: true
+    })
+
     const url = query 
       ? `${apiBaseSearchUrl}${query}/${offset}/${limit}`
       : `${apiBaseTrendingUrl}${query}/${offset}/${limit}`
@@ -63,6 +68,7 @@ class App extends Component {
           totalGifCount: res.data.pagination.total_count,
           tabTitle: tabTitle,
           validSearch: true,
+          loading: false
         }))
         console.log(this.state)
       })
@@ -119,6 +125,7 @@ class App extends Component {
             getResponse={this.getResponse} 
           />
           <TabContainer
+            loading={loading}
             error={error} 
             tabTitle={tabTitle} 
             totalGifCount={totalGifCount}

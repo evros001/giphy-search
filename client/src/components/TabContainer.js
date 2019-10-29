@@ -8,6 +8,7 @@ function TabContainer (props) {
     tabTitle, 
     totalGifCount, 
     validSearch,
+    loading,
     error 
   } = props
 
@@ -24,9 +25,23 @@ function TabContainer (props) {
 
   return (
     <div className={styles.container}>
-      <span className={hasResults}>{title}</span>
-      {   emptyPayload &&
-        <span className={styles.count}>{totalGifCount}</span>
+      { loading &&
+        <Loader
+          visible={loading}
+          type="Oval"
+          color="#000000"
+          height={50}
+          width={50}
+          className={styles.loader}
+        />
+      }
+      { !loading &&
+        <React.Fragment>
+          <span className={hasResults}>{title}</span>
+            {   emptyPayload &&
+              <span className={styles.count}>{totalGifCount}</span>
+            }
+        </React.Fragment>
       }
     </div>
   )

@@ -3,7 +3,7 @@ const axios = require('axios');
 const baseSearchURL = 'https://api.giphy.com/v1/gifs/search'
 const apiKey = process.env.GIPHYAPIKEY
 
-const getSearch = async (query, offset = 0, limit = 25) => {
+const getSearch = async (query, offset = 0, limit = 1) => {
 	const url = `${baseSearchURL}?api_key=${apiKey}&q=${query}&offset=${offset}&limit=${limit}`
 	
   try {
